@@ -17,6 +17,19 @@ const App = () => {
     }
   }, [theme])
 
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark');
+    const handleChange = (e) => {
+      setTheme(e.matches ? 'dark' : 'light');
+    }
+
+    mediaQuery.addEventListener("change", handleChange);
+
+    return () => {
+      mediaQuery.removeEventListener("change", handleChange)
+    };
+  }, [])
+
   const handleChangeTheme = () => {
     console.log("change");
     setTheme( theme === 'light' ? 'dark' : 'light');
